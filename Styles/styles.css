@@ -1,0 +1,89 @@
+.icono{
+    width: 35px;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(151, 71, 255);
+    height: 5%;
+    align-items: baseline;
+}
+
+body {
+    background-color: rgb(226, 203, 253);
+}
+.navegador{
+    color: white;
+    font-family: Helvetica;
+}
+
+.titulo{
+    
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+}
+.titulo > h1, input{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+h1,p{
+    text-align: center;
+    color: white;
+    font-family: Helvetica;
+
+}
+h2{
+    text-align: left;
+    color: white;
+    font-family: Helvetica;
+    padding-left: 5%;
+}
+
+
+.noticias-tips{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 3 / 2;
+}
+.noticias-tips > img{
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px;
+    border-color: gray;
+}
+
+.prebuild{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(226, 203, 253) ;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.prebuild > img{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5%;
+    width: 200px;
+    height: 200px;
+
+}
+
+.cuerpo {
+    background-color: rgb(31, 31, 31);
+
+}
+.cuerpo > section{
+    display: flex;
+}
