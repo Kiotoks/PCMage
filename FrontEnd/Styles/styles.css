@@ -1,0 +1,39 @@
+.icono{
+    width: 35px;
+}
+
+nav{
+    background-color: rgb(151, 71, 255);
+    height: 35px;
+}
+
+body {
+    background-color: rgb(226, 203, 253);
+}
+.navegador{
+    color: white;
+    font-family: Helvetica;
+}
+
+.noticias-tips{
+    width: 200px;
+    height: 200px;
+}
+
+h1{
+    text-align: center;
+
+}
+
+.configurador{
+    
+}
+
+.body {
+    width: 80%;
+    background-image: ;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    max-width: 500px;
+  }
