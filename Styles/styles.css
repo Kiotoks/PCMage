@@ -33,7 +33,7 @@ body {
 
 h1{
     text-align: center;
-    color: white;
+    color: black;
     font-family: Helvetica;
     font-size:100px;
 }
@@ -90,8 +90,7 @@ hr {
     margin-left: auto;
     margin-right: auto;
     padding: 5%;
-    width: 200px;
-    height: 200px;
+    max-width: 90%;
 
 }
 .prebuild > input{
@@ -111,5 +110,6 @@ hr {
 .cuerpo > section{
     padding-top: 1%;
     display: flex;
+    
     
 }
