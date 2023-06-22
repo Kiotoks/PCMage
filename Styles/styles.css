@@ -24,25 +24,38 @@ body {
     text-align: center;
     flex-direction: column;
 }
-.titulo > h1, input{
+.titulo > div{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-
-h1,p{
+h1{
     text-align: center;
     color: white;
     font-family: Helvetica;
+    font-size:100px;
+}
+
+p{
+    text-align: center;
+    color: rgb(180, 180, 180);
+    font-family: Helvetica;
 
 }
+
 h2{
     text-align: left;
     color: white;
     font-family: Helvetica;
     padding-left: 5%;
+    padding-top: 5%;
+}
+hr {
+    border: 2px solid rgb(151, 71, 255);
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 
@@ -51,14 +64,16 @@ h2{
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    aspect-ratio: 3 / 2;
+    max-width: 30%;
 }
 .noticias-tips > img{
     width: 85%;
+    aspect-ratio: 4/3;
     margin-left: auto;
     margin-right: auto;
-    border: 3px;
-    border-color: gray;
+    border-style:solid;
+    border-color: gainsboro;
+    border-radius: 5px;
 }
 
 .prebuild{
@@ -79,11 +94,22 @@ h2{
     height: 200px;
 
 }
+.prebuild > input{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5%;
+}
+
 
 .cuerpo {
     background-color: rgb(31, 31, 31);
+    display: flex;
+    flex-direction: column;
+    
 
 }
 .cuerpo > section{
+    padding-top: 1%;
     display: flex;
+    
 }
