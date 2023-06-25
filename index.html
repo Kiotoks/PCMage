@@ -9,16 +9,45 @@
     </head>
     <body> 
         <header>
-            <nav>
-                <ul>
-                    <il><a href="index.html"><img src="Styles\img\Placeholder.ico" class="icono"></a></il>
-                    <il><a href="buscar.html" class="navegador">Buscar</a></il>
-                    <il><a href="sobrenos.html" class="navegador">Sobre Nosotros</a></il> 
-                </ul>
+            
+
+            <nav class="menu-container">
+                <!-- burger menu -->
+                <input type="checkbox" aria-label="Toggle menu" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <!-- logo -->
+                <a href="/index.html" class="menu-logo">
+                    <img src= "Styles/img/Placeholder.png" alt="My Awesome Website"/>
+                </a>
+
+                <!-- menu items -->
+                <div class="menu">
+                    <ul>
+                    <li>
+                        <a href="/home">
+                        Noticias
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/sobrenos.html">
+                        Sobre nosotros
+                        </a>
+                    </li>
+                    </ul>
+                    <ul>
+                    <li>
+                        <a href="/buscar.html">
+                        Buscar 🔍
+                        </a>
+                    </li>
+                    </ul>
+                </div>
             </nav>
         </header>
         <div class="titulo">
-            <img src="Styles/img/mage.jpg" style="width:100%; height: 500px;">
+            <img src="Styles/img/mage.jpg" style="height:30%;">
             <div>
                 <h1>PC Mage</h1>
                 <a href="configurador.html"><input type="button" value="Configurador" class="configurador"></a>
@@ -28,8 +57,11 @@
         </div>
     
     <section class="cuerpo">
-        <h2>Noticias</h2>
-        <hr>
+        <div>
+            <h2>Noticias</h2>
+            <hr>
+        </div>
+        
         <section> 
             <div  class="noticias-tips">
                 <img src="Styles/img/que-es-el-wifi-6-1592807.png" alt="Noticia1">
@@ -50,15 +82,15 @@
             
             <div class="prebuild">
                 <img src="Styles\img\Placeholder.png" alt="prebuild1" class="prebuildft">
-                <input type="button" value="Configurador" class="configurador">
+                <input type="button" value="Low" class="configurador">
             </div>
             <div class="prebuild">
                 <img src="Styles\img\Placeholder.png" alt="prebuild2" class="prebuildft">
-                <input type="button" value="Configurador" class="configurador">
+                <input type="button" value="Mid" class="configurador">
             </div>
             <div class="prebuild">
                 <img src="Styles\img\Placeholder.png" alt="prebuild3" class="prebuildft">
-                <input type="button" value="Configurador" class="configurador">
+                <input type="button" value="Ultra" class="configurador">
             </div>
         </section>
         <h2>Tips</h2>
@@ -78,6 +110,9 @@
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium accusamus pariatur quisquam inventore quam assumenda ipsum ut libero molestiae. Facere, ea explicabo ratione cum possimus ducimus neque at voluptatem iusto?</p>
             </div>
         </section>
+        <footer>
+            <div></div>
+        </footer>
     </section>
     </body>
     </html>
