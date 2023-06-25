@@ -185,7 +185,6 @@ body {
 }
 .navegador{
     color: white;
-    font-family: Helvetica;
 }
 
 .titulo{
@@ -204,23 +203,22 @@ body {
 h1{
     text-align: center;
     color: black;
-    font-family: Helvetica;
     font-size:200px;
 }
 
 p{
     text-align: center;
     color: rgb(180, 180, 180);
-    font-family: Helvetica;
-
+    font-size: 25px;
+    
 }
 
 h2{
     color: white;
-    font-family: Helvetica;
     padding-left: 7%;
     padding-top: 5%;
     margin: 0;
+    font-size: 50px;
 }
 hr {
     border: 1px solid rgb(151, 71, 255);
@@ -293,4 +291,5 @@ input{
 .cuerpo > section{
     
     display: flex;
+    align-items: center;
 }
