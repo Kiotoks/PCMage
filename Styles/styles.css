@@ -89,8 +89,8 @@
   }
   
   .menu li {
-    padding: 10px 0;
-    font-size: 22px;
+    font-size: 30px;
+    margin-left: 73px;
   }
   
   /* mobile styles */
@@ -112,23 +112,21 @@
     }
   
     .menu {
-      position: absolute;
+      position: relative;
       box-sizing: border-box;
       width: 300px;
-      right: -300px;
-      top: 0;
+   
       margin: -20px;
-      padding: 75px 50px 50px;
+     
       background: #ffffff;
-      -webkit-font-smoothing: antialiased;
       /* to stop flickering of text in safari */
       transform-origin: 0% 0%;
-      transform: translateX(0%);
+      transform: translateX(100%);
       transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
     }
   
     .menu-container input:checked ~ .menu {
-      transform: translateX(-100%);
+      transform: translateX(0%);
     }
   }
   
@@ -175,6 +173,7 @@ footer > div{
     height: 3%;
     align-items: baseline;
     padding: 3%;
+    margin-top: 15%;
 }
 
 body {
@@ -204,12 +203,14 @@ h1{
     text-align: center;
     color: black;
     font-size:200px;
+    margin-bottom: 4%;
+    margin-top:4%;
 }
 
 p{
     text-align: center;
     color: rgb(180, 180, 180);
-    font-size: 25px;
+    font-size: 35px;
     
 }
 
@@ -239,17 +240,20 @@ input{
     padding: 10px 20px 10px 20px;
     text-decoration: none;
 }
+input:hover{
+  transform: scale(1.05);
+}
 
 .noticias-tips{
     display: flex;
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    max-width: 30%;
+    width: 50%;
 }
 .noticias-tips > img{
     width: 85%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 19/9;
     margin-left: auto;
     margin-right: auto;
     border-style:solid;
@@ -266,7 +270,13 @@ input{
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
+    float: left;
+    transition: all .2s;
     
+}
+.prebuild:hover {
+  box-shadow: 2px 12px 15px #000000;
+  transform: translateY(-5px);
 }
 .prebuild > img{
     margin-left: auto;
@@ -289,7 +299,8 @@ input{
     flex-direction: column;
 }
 .cuerpo > section{
-    
+  margin-left: auto;
+  margin-right: auto;
     display: flex;
-    align-items: center;
+    max-width: 95%;
 }
