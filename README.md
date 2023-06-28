@@ -10,3 +10,5 @@ Para poder utilizar el codigo deberas descargar las siguientes referencias:
 - GPT4All: App de escritorio que se puede descargar desde https://gpt4all.io/index.html
 - Python3: Preferiblemente la ultima version de este. https://www.python.org/downloads/
 - Necesitaras una key para la api de MercadoLibre
+
+https://thedataschools.com/python/mongodb-insert-document/
