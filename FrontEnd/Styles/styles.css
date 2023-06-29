@@ -19,8 +19,7 @@
   }
   
   .menu-logo img {
-    max-height: 60%;
-    max-width: 100px;
+    max-height: 60PX;
     flex-shrink: 0;
   }
   
@@ -201,12 +200,12 @@ body {
 }
 
 h1{
-    text-shadow: 8px 8px 8px #000000b9;;
+    text-shadow: 10px 10px 8px #000000;;
     text-align: center;
     color: rgb(255, 255, 255);
     font-size:200px;
     margin-bottom: 4%;
-  margin-top:4%;
+    margin-top:40%;
 }
 
 p{
