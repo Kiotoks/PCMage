@@ -1,30 +1,24 @@
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
+from pymongo import MongoClient
 
-uri = "mongodb+srv://PcMage:PcMage123@cluster1.lc6nmqa.mongodb.net/?retryWrites=true&w=majority"
+# Cadena de conexión de MongoDB Atlas
+connection_string = "mongodb+srv://PcMage:PcMage123@cluster1.lc6nmqa.mongodb.net/?retryWrites=true&w=majority"
 
-client = MongoClient(uri, server_api=ServerApi('1'))
+# Crea una instancia del cliente de MongoDB
+client = MongoClient(connection_string)
 
-collection = informaciónclientes ["clientes_españa"]
+# Selecciona una base de datos
+db = client.Noticia
 
-informaciónclientes = [
-{
-"nombre" : "García",
-"dirección" : "Calle Ejemplo 10",
-"código postal" : "46006",
-"ciudad" : "Valencia"
-}
-{
-"nombre" : "Rodríguez",
-"dirección" : "Calle Principal 1",
-"código postal" : "28007",
-"ciudad" : "Madrid"
-}
-{
-"nombre" : "González",
-"dirección" : "Calle Amplia 2",
-"código postal" : "36002",
-"ciudad" : "Pontevedra"
-}
-]
-collection.insert_many(informaciónclientes)
+# Selecciona una colección
+collection = db.noticias
+
+# Insertar un documento en la colección
+document = {"name": "John", "age": 30}
+collection.insert_one(document)
+
+# Realizar operaciones en la base de datos
+# Por ejemplo, consultar documentos
+documentos = collection.find()
+
+for documento in documentos:
+    print(documento)
