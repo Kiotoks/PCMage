@@ -7,8 +7,12 @@ Nuestro proyecto se basa en crear una página web que te ayude a elegir los mejo
 
 Para poder utilizar el codigo deberas descargar las siguientes referencias:
 
-- GPT4All: App de escritorio que se puede descargar desde https://gpt4all.io/index.html
+- ChatGPT: utilizamos la API de chat gpt para realizar las recomendaciones 
 - Python3: Preferiblemente la ultima version de este. https://www.python.org/downloads/
 - Necesitaras una key para la api de MercadoLibre
 
+https://platform.openai.com/docs/api-reference/requesting-organization
+https://platform.openai.com/account/api-keys
+https://platform.openai.com/docs/api-reference/introduction
+https://platform.openai.com/docs/guides/gpt/chat-completions-api
 https://thedataschools.com/python/mongodb-insert-document/
