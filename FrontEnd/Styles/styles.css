@@ -215,7 +215,7 @@ p{
     
 }
 
-h2{
+.cuerpo > h2{
     color: white;
     padding-left: 7%;
     padding-top: 5%;
@@ -304,4 +304,21 @@ input:hover{
   margin-right: auto;
     display: flex;
     max-width: 95%;
+}
+
+.sobrenosotros{
+  font-family: Helvetica, sans-serif;
+  color: black;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+h2{
+  font-family: Helvetica, sans-serif;
+  color:white;
+  font-size: 50px;
+  text-align: center;
+ 
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
 }
