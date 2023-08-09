@@ -1,47 +1,27 @@
 import requests
+import os
 
-def search_products(query):
-    # Definir las credenciales de la API (reemplaza con tus propias credenciales)
-    client_id = '6228197328840507'
-    client_secret = 'Sr6YzPZGAT2xvSdBWtf2YPbzI1ntHhB0'
+def get_product_price(product_id):
+    # Definir la URL del producto utilizando su ID
+    product_url = f'https://api.mercadolibre.com/items/{product_id}'
 
-    # Obtener el token de acceso
-    token_url = 'https://api.mercadolibre.com/oauth/token'
-    token_data = {
-        'grant_type': 'client_credentials',
-        'client_id': client_id,
-        'client_secret': client_secret
-    }
-    response = requests.post(token_url, data=token_data)
-    access_token = response.json()['access_token']
+    # Realizar la solicitud GET
+    response = requests.get(product_url)
 
-    # Realizar la búsqueda de productos
-    search_url = 'https://api.mercadolibre.com/sites/MLA/search'
-    params = {
-        'q': query,
-        'limit': 10
-    }
-    response = requests.get(search_url, params=params)
-    products = response.json()['results']
-
-    # Mostrar información básica de los productos
-    for product in products:
-        print('Precio:', product['price'])
-        print('URL:', product['permalink'])
-        print('-' * 40)
-
+    # Verificar si la solicitud fue exitosa (código de respuesta 200)
     if response.status_code == 200:
-        products = response.json()['results']
-        for product in products:
-            print('Título:', product['title'])
-            print('Precio:', product['price'])
-            print('URL:', product['permalink'])
-            print('-' * 40)
+        product_data = response.json()
+        product_price = product_data.get('price')
+        if product_price is not None:
+            return product_price
+        else:
+            return 'Precio no disponible'
     else:
-        print('Error en la solicitud:', response.status_code)
+        return 'Error en la solicitud'
 
-    if __name__ == '__main__':
-    search_query = input('Ingresa un término de búsqueda: ')
-    search_products(search_query)
+if __name__ == '__main__':
+    product_id = input('Ingresa la ID del producto: ')
+    price = get_product_price(product_id)
+    print('Precio del producto:', price)
 
-
+os.system("pause")
