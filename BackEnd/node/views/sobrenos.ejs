@@ -1,0 +1,64 @@
+<%- include('template/cabecera', {tituloweb: 'Inicio EJS'}); %>
+    <body> 
+        <header>
+            <nav class="menu-container">
+                <input type="checkbox" aria-label="Toggle menu" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <a href="index.html" class="menu-logo">
+                    <img src= "FrontEnd/Styles/img/witch-hat 3.png" alt="My Awesome Website"/>
+                </a>
+                <div class="menu">
+                    <ul>
+                       
+                    </ul>
+                    <ul>
+                         <li>
+                            <a href="configurador.html">
+                            Configurador
+                            </a>
+                        </li>
+                        <li>
+                            <a href="sobrenos.html">
+                            Sobre nosotros
+                            </a>
+                        </li>
+                    <li>
+                        <a href="buscar.html">
+                        Buscar <img src="FrontEnd/Styles/img/icons8-lupa-250.png" style="max-width: 25px;;">
+                        </a>
+                    </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <section>
+            <h1 class="titS" style="font-size: 90px; margin-top: 5%;">Sobre Nosotros</h1>
+            <p class="sobrenosotros">Somos estudiantes de la Escuela Técnica N°36 "Almirante Guillermo Brown", del curso 5°3° de la especialidad de informática haciendo una página web para la materia proyecto informático II</p>
+            
+            <p class="sobrenosotros">Los integrantes somos:</p>
+        </section>
+        <section class="cuerpo" style="display: flex; flex-direction: row; padding-top: 5em; padding-bottom: 5em; padding: 2em;">
+            
+            <div class="prebuild">
+                <img src="FrontEnd/Styles\img\Placeholder.png" alt="prebuild1" class="prebuildft" >
+                <a href="https://instagram.com/ocin_v2" class="nosotros">Nicolás</a>
+            </div>
+            <div class="prebuild">
+                <img src="FrontEnd/Styles\img\Placeholder.png" alt="prebuild2" class="prebuildft">
+                <input type="button" value="Agustín" class="configurador">
+            </div>
+            <div class="prebuild">
+                <img src="FrontEnd/Styles\img\Placeholder.png" alt="prebuild3" class="prebuildft">
+                <input type="button" value="Josué" class="configurador">
+            </div>
+            <div class="prebuild">
+                <img src="FrontEnd/Styles\img\Placeholder.png" alt="prebuild3" class="prebuildft">
+                <input type="button" value="Juan" class="configurador">
+            </div>
+
+            <%- include('template/footer'); %>
+        </section>
+        </body>
+</html>
