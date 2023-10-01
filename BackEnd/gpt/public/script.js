@@ -1,0 +1,20 @@
+        // JavaScript para enviar solicitudes a tu servidor y obtener respuestas de GPT-3
+        document.getElementById('generate-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const prompt = document.getElementById('prompt').value;
+
+            fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('response').textContent = data;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        });
