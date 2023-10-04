@@ -2,7 +2,7 @@ const express = require('express');
 const openai = require('openai');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
 const app = express();
@@ -20,7 +20,13 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 async function getListaComponentes() {
-    const client = new MongoClient(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+    const client = new MongoClient(mongodbURI, {
+        serverApi: {
+          version: ServerApiVersion.v1,
+          strict: true,
+          deprecationErrors: true,
+        }
+    });
     const collectionName = 'Componentes';
     try {
         await client.connect();
@@ -36,7 +42,17 @@ async function getListaComponentes() {
     }
 }
 
-  
+getListaComponentes()
+.then(documents => {
+    console.log('Documentos encontrados:', documents);
+    documents.forEach(x => {
+        console.log(x['_id']);
+    });
+})
+.catch(error => {
+    console.error('Error en la función principal:', error);
+});
+
 app.get("/", (req, res) => {
     res.render("index", { titulo: "inicio EJS" });
     //res.sendFile(__dirname + "/public/index.html"); funcional
