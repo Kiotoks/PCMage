@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 
 const mongodbURI = process.env.MONGODB_URI;
-const dbName = 'PcMage';
+const dbName = 'pcmdb';
 
 const chatGPTAPIKey = process.env.OPENAI_KEY;
 const openaiClient = new openai({ apiKey: chatGPTAPIKey });
@@ -19,7 +19,7 @@ app.set("views", __dirname + "/views");
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-async function getListaComponentes() {
+async function getListaComponentes(filtro) {
     const client = new MongoClient(mongodbURI, {
         serverApi: {
           version: ServerApiVersion.v1,
@@ -32,7 +32,7 @@ async function getListaComponentes() {
         await client.connect();
         const db = client.db(dbName);
         const collection = db.collection(collectionName);
-        const documents = await collection.find({}).toArray();
+        const documents = await collection.find(filtro).toArray();
         return documents;
     } catch (error) {
         console.error('Error al obtener los documentos:', error);
@@ -42,30 +42,33 @@ async function getListaComponentes() {
     }
 }
 
-getListaComponentes()
-.then(documents => {
-    console.log('Documentos encontrados:', documents);
-    documents.forEach(x => {
-        console.log(x['_id']);
+let listaCompConPrecios = "";
+let tipoComponentes = ["cpu","gpu"];
+tipoComponentes.forEach(tipo => {
+    listaCompConPrecios += tipo + " list (with their prices in argentinian pesos): ";
+    getListaComponentes({"tipo": tipo})
+    .then(documents => {
+        documents.forEach(x => {
+            listaCompConPrecios += x['nom'] +" $";
+            listaCompConPrecios += x['precio'] + ", ";
+        });
+    })
+    .catch(error => {
+        console.error('Error en la función principal:', error);
     });
-})
-.catch(error => {
-    console.error('Error en la función principal:', error);
 });
+
 
 app.get("/", (req, res) => {
     res.render("index", { titulo: "inicio EJS" });
-    //res.sendFile(__dirname + "/public/index.html"); funcional
 });
 
 app.get("/buscar", (req, res) => {
     res.render("buscar", { titulo: "inicio EJS" });
-    //res.sendFile(__dirname + "/public/index.html"); funcional
 });
 
 app.get("/sobrenos", (req, res) => {
     res.render("sobrenos", { titulo: "inicio EJS" });
-    //res.sendFile(__dirname + "/public/index.html"); funcional
 });
 
 app.get('/configurador', (req, res) => {
@@ -81,7 +84,8 @@ app.post('/generate', (req, res) => {
     console.log(typePc);
     console.log(prompt);
 
-    var variable = "Give me a " + typePc + " PC specification list with a budget of" + prompt + " USD. Reduce your awnser to just the pc components separated by a comma" 
+    var variable = "Give me a " + typePc + " PC specification list with a budget of " + prompt + " argentinian pesos. Choose one from every of this lists of components "+listaCompConPrecios+". Reduce your awnser to just one component from each list separated by a comma";
+    console.log(variable);
 
     openaiClient.completions.create({
         model: 'gpt-3.5-turbo-instruct', // Modelo de GPT-3
