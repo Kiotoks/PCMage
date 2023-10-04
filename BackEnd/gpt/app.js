@@ -24,11 +24,15 @@ app.get('/', (req, res) => {
 
 // Ruta para generar texto utilizando GPT-3
 app.post('/generate', (req, res) => {
-    const { prompt } = req.body;
+    const { typePc, prompt } = req.body;
+    console.log(typePc);
+    console.log(prompt);
+
+    var variable = "Give me a " + typePc + " PC specification list with a budget of" + prompt + " USD. Reduce your awnser to just the pc components separated by a comma" 
 
     openaiClient.completions.create({
-        model: 'text-davinci-003', // Modelo de GPT-3
-        prompt: prompt,
+        model: 'gpt-3.5-turbo-instruct', // Modelo de GPT-3
+        prompt: variable,
         max_tokens: 150 // Límite de tokens en la respuesta
     })
     .then(response => {
