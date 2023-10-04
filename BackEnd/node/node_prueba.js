@@ -1,6 +1,7 @@
 const express = require('express');
 const openai = require('openai');
 const bodyParser = require('body-parser');
+const port =  process.env.PORT || 3030;
 const ejs = require('ejs');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
@@ -75,16 +76,12 @@ app.get('/configurador', (req, res) => {
     res.render('config', { titulo: "inicio EJS" });
 });
 
-app.listen(3000, () => {
-    console.log(`Example app listening at http://localhost:${3000}`);
-});
-
 app.post('/generate', (req, res) => {
     const { typePc, prompt } = req.body;
     console.log(typePc);
     console.log(prompt);
 
-    var variable = "Give me a " + typePc + " PC specification list with a budget of " + prompt + " argentinian pesos. Choose one from every of this lists of components "+listaCompConPrecios+". Reduce your awnser to just one component from each list separated by a comma";
+    var variable = `Give me a ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component from each list separated by a comma`;
     console.log(variable);
 
     openaiClient.completions.create({
@@ -99,4 +96,8 @@ app.post('/generate', (req, res) => {
         console.error(error);
         res.status(500).send('Error generando la respuesta.');
     });
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
 });
