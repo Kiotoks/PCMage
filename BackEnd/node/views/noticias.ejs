@@ -1,0 +1,14 @@
+
+<%- include('template/cabecera', {titulo:'PcMage - Noticia'}); %>
+<body>
+    <%- include('template/navbar'); %>
+    <img src="<%= news.img1 %>" alt="">
+    <section class="cuerpo">
+        <h2><%= news.titulo %></h2>
+        <hr>
+        <p><%- news.articulo %></p>
+        <p><%= news.fecha %></p>
+        <%- include('template/footer'); %>
+    </section>
+</body>
+</html>

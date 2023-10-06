@@ -1,4 +1,4 @@
-<%- include('template/cabecera', {tituloweb: 'Inicio EJS'}); %>
+<%- include('template/cabecera', {titulo: 'PcMage'}); %>
 <body>
     <%- include('template/navbar'); %>
     <div class="titulo">
@@ -15,16 +15,18 @@
         <hr>
         <section>
             <div  class="noticias-tips">
-                <img src="/img/que-es-el-wifi-6-1592807.png" alt="Noticia1">
-                <p>Titulo de la noticia</p>
-                
+                <img id="img">
+                <a id="a"></a>
             </div>
+               
             <div  class="noticias-tips">
-                <img src="/img/precio-gpus.png" alt="Noticia2">
-                <p>Titulo de la noticia</p>
+                <img id="img">
+                <a id="a"></a>
             </div>
-            <div  class="noticias-tips"><img src="/img/Placeholder.png" alt="Noticia3">
-                <p>Titulo de la noticia</p>
+            
+            <div  class="noticias-tips">
+                <img id="img">
+                <a id="a"></a>
             </div>
         </section>
         <h2>Pre-Builds</h2>
@@ -62,7 +64,7 @@
             </div>
         </section>
     </section>
-
+    <script src="pagPriScript.js"></script>
     <%- include('template/footer'); %>
 </body>
 

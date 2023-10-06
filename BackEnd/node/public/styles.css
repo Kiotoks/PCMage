@@ -214,6 +214,13 @@ p{
     font-size: 35px;
     
 }
+a{
+  text-decoration:none;
+  text-align: center;
+  color: rgb(180, 180, 180);
+  font-size: 35px;
+  
+}
 
 .cuerpo > h2{
     color: white;

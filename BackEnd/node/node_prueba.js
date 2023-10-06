@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname +'/public'));
 
 async function getListaComponentes(filtro) {
     const client = new MongoClient(mongodbURI, {
@@ -42,6 +42,52 @@ async function getListaComponentes(filtro) {
         client.close();
     }
 }
+async function getNoticia(codigo){
+    const client = new MongoClient(mongodbURI, {
+        serverApi: {
+          version: ServerApiVersion.v1,
+          strict: true,
+          deprecationErrors: true,
+        }
+    });
+
+    try {
+        const db = client.db(dbName);
+        const collection = db.collection('Noticias');
+        const documents = await  collection.findOne({ code: codigo });
+        return documents;
+    } catch (error) {
+        console.error('Error al obtener los documentos:', error);
+        throw error;
+    }
+
+}
+
+async function getRN(codigo){
+    const client = new MongoClient(mongodbURI, {
+        serverApi: {
+          version: ServerApiVersion.v1,
+          strict: true,
+          deprecationErrors: true,
+        }
+    });
+
+    try {
+        const db = client.db(dbName);
+        const collection = db.collection('Noticias');
+        const randomDocument = await collection.aggregate([{ $sample: { size: 1 } }]).toArray();
+    
+        if (randomDocument.length > 0) {
+        return randomDocument[0];
+        } else {
+        console.log('No documents found in the collection.');
+        }
+    } catch (error) {
+        console.error('Error al obtener los documentos:', error);
+        throw error;
+    }
+}
+
 
 let listaCompConPrecios = "";
 let tipoComponentes = ["cpu","gpu"];
@@ -61,28 +107,36 @@ tipoComponentes.forEach(tipo => {
 
 
 app.get("/", (req, res) => {
-    res.render("index", { titulo: "inicio EJS" });
+    res.render("index");
 });
 
 app.get("/buscar", (req, res) => {
-    res.render("buscar", { titulo: "inicio EJS" });
+    res.render("buscar");
 });
 
 app.get("/sobrenos", (req, res) => {
-    res.render("sobrenos", { titulo: "inicio EJS" });
+    res.render("sobrenos");
 });
 
 app.get('/configurador', (req, res) => {
-    res.render('config', { titulo: "inicio EJS" });
+    res.render('config');
 });
+
+app.get('/noticias/:cod', (req, res) => {
+    const codNoticia = req.params.cod.toString();
+    getNoticia(codNoticia)
+    .then(news =>{
+        res.render('noticias', { news: news });
+    })
+    .catch(error => {
+        console.error('Error en la función principal:', error);
+    });
+    
+  });
 
 app.post('/generate', (req, res) => {
     const { typePc, prompt } = req.body;
-    console.log(typePc);
-    console.log(prompt);
-
     var variable = `Give me a ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component from each list separated by a comma`;
-    console.log(variable);
 
     openaiClient.completions.create({
         model: 'gpt-3.5-turbo-instruct', // Modelo de GPT-3
@@ -97,6 +151,18 @@ app.post('/generate', (req, res) => {
         res.status(500).send('Error generando la respuesta.');
     });
 });
+
+app.post('/grn', (req, res) => {
+    getRN()
+    .then(response => {
+        res.send(response);
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send('Error generando la respuesta.');
+    });
+});
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
