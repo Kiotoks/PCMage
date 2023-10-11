@@ -63,7 +63,38 @@ async function getNoticia(codigo){
 
 }
 
-async function getRN(codigo){
+async function buscarNoticia(query){
+    const client = new MongoClient(mongodbURI, {
+        serverApi: {
+          version: ServerApiVersion.v1,
+          strict: false,
+          deprecationErrors: true,
+        }
+    });
+
+    const search = { $text: { $search: query } };
+
+    const projection = {
+        _id: 0,
+        titulo: 1,
+        img1:1,
+        code: 1,
+    };
+
+    try {
+        const db = client.db(dbName);
+        const collection = db.collection('Noticias');
+        await collection.createIndex({ titulo: 'text' });
+        const documents = await  collection.find(search).project(projection).toArray();
+        return documents;
+    } catch (error) {
+        console.error('Error al obtener los documentos:', error);
+        throw error;
+    }
+
+}
+
+async function getRN(){
     const client = new MongoClient(mongodbURI, {
         serverApi: {
           version: ServerApiVersion.v1,
@@ -92,7 +123,7 @@ async function getRN(codigo){
 let listaCompConPrecios = "";
 let tipoComponentes = ["cpu","gpu"];
 tipoComponentes.forEach(tipo => {
-    listaCompConPrecios += tipo + " list (with their prices in argentinian pesos): ";
+    listaCompConPrecios += `.  ${tipo} list (with their prices in argentinian pesos): `;
     getListaComponentes({"tipo": tipo})
     .then(documents => {
         documents.forEach(x => {
@@ -110,10 +141,6 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/buscar", (req, res) => {
-    res.render("buscar");
-});
-
 app.get("/sobrenos", (req, res) => {
     res.render("sobrenos");
 });
@@ -122,17 +149,34 @@ app.get('/configurador', (req, res) => {
     res.render('config');
 });
 
+app.get("/cargarnoticia", (req, res)=> {
+    res.render('cargarNoticia');
+});
+
 app.get('/noticias/:cod', (req, res) => {
     const codNoticia = req.params.cod.toString();
     getNoticia(codNoticia)
     .then(news =>{
+        console.log(news)
         res.render('noticias', { news: news });
     })
     .catch(error => {
         console.error('Error en la función principal:', error);
     });
     
-  });
+});
+
+app.get('/buscar/:query', (req, res) => {
+    const busqueda = req.params.query.toString();
+    buscarNoticia(busqueda)
+    .then(news =>{
+        res.render('buscar', { noticias: news });
+    })
+    .catch(error => {
+        console.error('Error en la función principal:', error);
+    });
+    
+});
 
 app.post('/generate', (req, res) => {
     const { typePc, prompt } = req.body;
@@ -163,6 +207,28 @@ app.post('/grn', (req, res) => {
     });
 });
 
+app.put('/cn', (req, res) => {
+    const noticia = req.body;
+    const client = new MongoClient(mongodbURI, {
+        serverApi: {
+          version: ServerApiVersion.v1,
+          strict: true,
+          deprecationErrors: true,
+        }
+    });
+    
+    const db = client.db(dbName);
+    const collection = db.collection('Noticias');
+
+    collection.insertOne(noticia)
+    .then(response => {
+        console.log("se cargo la noticia :)");
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send('Error cargando la noticia.');
+    });
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
