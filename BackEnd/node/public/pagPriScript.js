@@ -1,13 +1,36 @@
 
 var noticias = document.getElementsByClassName("noticias-tips");
-document.getElementById("cargarNoticias").addEventListener("click",getLastNews);
+
+botonAdelante = document.getElementById("notAd");
+botonAdelante.addEventListener("click",adelantarPag);
+
+botonAtras = document.getElementById("notAt");
+botonAtras.addEventListener("click",retrocederPag);
+botonAtras.style.display = "none";
+
+
 document.getElementById("botonTips").addEventListener("click",getTip);
 tipText = document.getElementById("tipText");
 
 var cantLast = 1;
 
-function getLastNews(){
-    let body = {cant:cantLast}
+function retrocederPag(){
+    cantLast-=1;
+    getLastNews(cantLast)
+}
+function adelantarPag(){
+    cantLast+=1;
+    getLastNews(cantLast)
+}
+
+function getLastNews(nPag){
+    let body = {cant:nPag}
+    if (nPag == 1){
+        botonAtras.style.display = "none";
+    }
+    else{
+        botonAtras.style.display = "block";
+    }
     fetch('/gln', {
         method: 'POST',
         headers: {
@@ -26,11 +49,11 @@ function getLastNews(){
             aElement.href = "/noticias/" + n["code"];
             i-=1;
         });
-        cantLast++;
     })
     .catch(error => {
         console.error(error);
     });
+    console.log(nPag)
 }
 
 function getTip(){
