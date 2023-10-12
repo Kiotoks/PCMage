@@ -65,7 +65,10 @@ function getTip(){
     })
     .then(response => response.text())
     .then(resp => {
-        console.log(resp)
+        if (resp == tipText.innerText){
+            getTip();
+            return;
+        }
         tipText.innerText = resp;
     })
     .catch(error => {
