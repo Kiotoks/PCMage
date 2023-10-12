@@ -11,6 +11,15 @@ const app = express();
 const mongodbURI = process.env.MONGODB_URI;
 const dbName = 'pcmdb';
 
+const client = new MongoClient(mongodbURI, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+});
+const db = client.db(dbName);
+
 const chatGPTAPIKey = process.env.OPENAI_KEY;
 const openaiClient = new openai({ apiKey: chatGPTAPIKey });
 
@@ -21,38 +30,19 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname +'/public'));
 
 async function getListaComponentes(filtro) {
-    const client = new MongoClient(mongodbURI, {
-        serverApi: {
-          version: ServerApiVersion.v1,
-          strict: true,
-          deprecationErrors: true,
-        }
-    });
     const collectionName = 'Componentes';
     try {
-        await client.connect();
-        const db = client.db(dbName);
         const collection = db.collection(collectionName);
         const documents = await collection.find(filtro).toArray();
         return documents;
     } catch (error) {
         console.error('Error al obtener los documentos:', error);
         throw error;
-    } finally {
-        client.close();
     }
 }
 async function getNoticia(codigo){
-    const client = new MongoClient(mongodbURI, {
-        serverApi: {
-          version: ServerApiVersion.v1,
-          strict: true,
-          deprecationErrors: true,
-        }
-    });
 
     try {
-        const db = client.db(dbName);
         const collection = db.collection('Noticias');
         const documents = await  collection.findOne({ code: codigo });
         return documents;
@@ -64,14 +54,6 @@ async function getNoticia(codigo){
 }
 
 async function buscarNoticia(query){
-    const client = new MongoClient(mongodbURI, {
-        serverApi: {
-          version: ServerApiVersion.v1,
-          strict: false,
-          deprecationErrors: true,
-        }
-    });
-
     const search = { $text: { $search: query } };
 
     const projection = {
@@ -82,7 +64,6 @@ async function buscarNoticia(query){
     };
 
     try {
-        const db = client.db(dbName);
         const collection = db.collection('Noticias');
         await collection.createIndex({ titulo: 'text' });
         const documents = await  collection.find(search).project(projection).toArray();
@@ -94,25 +75,42 @@ async function buscarNoticia(query){
 
 }
 
-async function getRN(){
-    const client = new MongoClient(mongodbURI, {
-        serverApi: {
-          version: ServerApiVersion.v1,
-          strict: true,
-          deprecationErrors: true,
-        }
-    });
+async function getLN(page){
 
     try {
-        const db = client.db(dbName);
         const collection = db.collection('Noticias');
-        const randomDocument = await collection.aggregate([{ $sample: { size: 1 } }]).toArray();
-    
-        if (randomDocument.length > 0) {
-        return randomDocument[0];
-        } else {
-        console.log('No documents found in the collection.');
+        let numDocs = await collection.countDocuments();
+        page = (numDocs/3) - page;
+        if (page > numDocs/3){
+            return [];
+           
         }
+        const pipeline = [
+            {
+                $skip: page * 3, // Skip items for previous pages
+            },
+            {
+                $limit: 3, // Limit the number of items on the current page
+            },
+        ];
+
+        const itemsOnPage = await collection.aggregate(pipeline).toArray();
+
+        return itemsOnPage; 
+    
+    } catch (error) {
+        console.error('Error al obtener los documentos:', error);
+        throw error;
+    }
+}
+
+async function getRTip(){
+    try {
+        const collection = db.collection('Tips');
+
+        resp = await collection.aggregate([{ $sample: { size: 1 } }]).toArray();
+        return resp[0]; 
+    
     } catch (error) {
         console.error('Error al obtener los documentos:', error);
         throw error;
@@ -196,8 +194,21 @@ app.post('/generate', (req, res) => {
     });
 });
 
-app.post('/grn', (req, res) => {
-    getRN()
+app.post('/getTip', (req, res) => {
+    getRTip()
+    .then(response => {
+        res.send(response["text"]);
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send('Error generando la respuesta.');
+    });
+});
+
+app.post('/gln', (req, res) => {
+    let cantSL = req.body.cant;
+    cantSL = parseInt(cantSL);
+    getLN(cantSL)
     .then(response => {
         res.send(response);
     })
