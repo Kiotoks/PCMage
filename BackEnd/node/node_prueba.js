@@ -80,7 +80,13 @@ async function getLN(page){
     try {
         const collection = db.collection('Noticias');
         let numDocs = await collection.countDocuments();
-        page = Math.trunc(numDocs/3) - page;
+        if(numDocs % 3 > 0){
+            page = (Math.trunc(numDocs/3)+1) - page;
+        }
+        else{
+            page = numDocs/3 - page;
+        }
+        
         if (page > numDocs/3){
             return [];
            
