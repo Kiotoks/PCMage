@@ -1,0 +1,61 @@
+<%- include('template/cabecera', {titulo: 'PcMage'}); %>
+<body>
+    <%- include('template/navbar'); %>
+    <div class="titulo">
+        <img src="/img/fondo pcmage.png" style="height:750px; max-width: 100%;">
+        <div>
+            <h1>PC Mage</h1>
+            <a href="/configurador"><input type="button" value="Configurador" class="configurador"></a>
+            
+        </div>
+    </div>
+
+    <section class="cuerpo">
+        <h2>Noticias</h2>
+        <hr>
+        <section>
+            <input type="button" value="Mas" class="configurador" id="notAt">
+            <div  class="noticias-tips">
+                <img id="img">
+                <a id="a"></a>
+            </div>
+               
+            <div  class="noticias-tips">
+                <img id="img">
+                <a id="a"></a>
+            </div>
+            
+            <div  class="noticias-tips">
+                <img id="img">
+                <a id="a"></a>
+            </div>
+            <input type="button" value="Mas" class="configurador" id="notAd">
+        </section>
+        <h2>Pre-Builds</h2>
+        <hr>
+        <section>
+            
+            <div class="prebuild">
+                <img src="/img/Placeholder.png" alt="prebuild1" class="prebuildft">
+                <input type="button" value="Low" class="configurador">
+            </div>
+            <div class="prebuild">
+                <img src="/img/Placeholder.png" alt="prebuild2" class="prebuildft">
+                <input type="button" value="Mid" class="configurador">
+            </div>
+            <div class="prebuild">
+                <img src="/img/Placeholder.png" alt="prebuild3" class="prebuildft">
+                <input type="button" value="Ultra" class="configurador">
+            </div>
+        </section>
+        <h2>Tips</h2>
+        <hr>
+        <section>
+            <input type="button" value="Tip aleatorio" class="configurador" id="botonTips">
+            <p id="tipText"></p>
+        </section>
+    </section>
+    <script src="pagPriScript.js"></script>
+    <%- include('template/footer'); %>
+</body>
+
