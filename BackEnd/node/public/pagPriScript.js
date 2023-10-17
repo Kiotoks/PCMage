@@ -1,6 +1,10 @@
 
 var noticias = document.getElementsByClassName("noticias-tips");
 
+document.getElementById("botonBuscar").addEventListener("click",buscar);
+
+textoBuscar = document.getElementById("textoBuscar");
+
 botonAdelante = document.getElementById("notAd");
 botonAdelante.addEventListener("click",adelantarPag);
 
@@ -13,6 +17,12 @@ document.getElementById("botonTips").addEventListener("click",getTip);
 tipText = document.getElementById("tipText");
 
 var cantLast = 1;
+
+
+function buscar(){
+    console.log("sex")
+    window.location.href = "/buscar/"+ textoBuscar.value
+}
 
 function retrocederPag(){
     cantLast-=1;

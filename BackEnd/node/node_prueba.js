@@ -14,7 +14,7 @@ const dbName = 'pcmdb';
 const client = new MongoClient(mongodbURI, {
     serverApi: {
       version: ServerApiVersion.v1,
-      strict: true,
+      strict: false,
       deprecationErrors: true,
     }
 });
