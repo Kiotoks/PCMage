@@ -2,34 +2,64 @@
 <body> 
     <%- include('template/navbar'); %>
     <section>
-        <h1 class="titS" style="font-size: 90px; margin-top: 5%;">Sobre Nosotros</h1>
-        <p class="sobrenosotros">Somos estudiantes de la Escuela Técnica N°36 "Almirante Guillermo Brown", del curso 5°3° de la especialidad de informática haciendo una página web para la materia proyecto informático II</p>
-        
-        <p class="sobrenosotros">Los integrantes somos:</p>
-    </section>
-    <section class="cuerpo" style="display: flex; flex-direction: row; padding-top: 5em; padding-bottom: 5em; padding: 2em;">
-        
-        <div class="prebuild">
-            <img src="\img\Placeholder.png" alt="prebuild1" class="prebuildft" >
-            <a href="https://instagram.com/ocin_v2" class="btn btn-dark" target="_blank">Nicolás</a>
-        </div>
-        <div class="prebuild">
-            <img src="\img\Placeholder.png" alt="prebuild2" class="prebuildft">
-            <a href="https://instagram.com/_unlucky71" class="btn btn-dark" target="_blank">Agustín</a>
-        </div>
-        <div class="prebuild">
-            <img src="\img\Placeholder.png" alt="prebuild3" class="prebuildft">
-            <a href="https://instagram.com/hosu_e_" class="btn btn-dark" target="_blank">Josué</a>
-        </div>
-        <div class="prebuild">
-            <img src="\img\Placeholder.png" alt="prebuild3" class="prebuildft">
-            <a href="https://instagram.com/jua_manue" class="btn btn-dark" target="_blank">Juan</a>
-        </div>
-        <div class="prebuild">
-            <img src="\img\Placeholder.png" alt="prebuild3" class="prebuildft">
-            <a href="https://instagram.com/alm.iago" class="btn btn-dark" target="_blank">Iago</a>
+        <div class="text-center" style=" background-color: rgb(226, 203, 253); margin-top: 9vh; width:100%;">
+            <h1 class="text-white text-center" style="font-size: 10vh; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.4vh;">Sobre Nosotros</h1>
+            <h4 style="margin-top:5vh; margin-bottom: 0;">Somos estudiantes de la Escuela Técnica N°36 "Almirante Guillermo Brown", del curso 5°3° de la especialidad de informática haciendo una página web para la materia proyecto informático II.</h4>    
         </div>
     </section>
-    <%- include('template/footer'); %>
 
+    <div class="container-fluid" style="background-color: #1f1f1f;">
+
+        <section>
+          <div class="row content">
+            <div class="col-sm-12" style="margin-bottom: 6.5vh;">
+                <h1 class="text-white" style="margin-top: 1vh;">Nosotros:</h1>
+                <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 56%; margin-left: 0;">
+
+                <div class="card-deck text-center align-items-center justify-content-center">
+
+                    <div class="card noticias-tips" style="border: none; background-color: rgb(226, 203, 253);">
+                      <img class="img-fluid" src="img/nico.jpg">
+                      <div class="card-body">
+                        <a class="btn btn-dark" href="https://instagram.com/ocin_v2">Nico</a>
+                      </div>
+                    </div>  
+                      
+                    <div class="card noticias-tips" style="border: none; background-color: rgb(226, 203, 253);">
+                        <img class="img-fluid" src="img/agus.jpg" >
+                        <div class="card-body">
+                          <a class="btn btn-dark" href="https://instagram.com/_unlucky71">Agus</a>
+                        </div>
+                      </div>  
+            
+                      <div class="card noticias-tips" style="border: none; background-color: rgb(226, 203, 253);">
+                        <img class="img-fluid" src="img/juan.jpg" >
+                        <div class="card-body">
+                          <a class="btn btn-dark" href="https://instagram.com/jua_manue">Juan</a>
+                        </div>
+                      </div>  
+
+                      <div class="card noticias-tips" style="border: none; background-color: rgb(226, 203, 253);">
+                        <img class="img-fluid" src="img/josue.jpg" >
+                        <div class="card-body">
+                          <a class="btn btn-dark" href="https://instagram.com/hosu_e_">Josué</a>
+                        </div>
+                      </div>  
+
+                      <div class="card noticias-tips" style="border: none; background-color: rgb(226, 203, 253);">
+                        <img class="img-fluid" src="img/iago.jpg" >
+                        <div class="card-body">
+                          <a class="btn btn-dark" href="https://instagram.com/alm.iago">Iago</a>
+                        </div>
+                      </div>  
+                </div>
+           </div>
+          </div>
+          </section>
+    </div>
+
+    <%- include('template/footer'); %>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
