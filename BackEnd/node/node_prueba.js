@@ -51,7 +51,46 @@ async function getNoticia(codigo){
         throw error;
     }
 
-} 
+}
+
+async function getBuildComps(filtro) {
+    const search = { $text: { $search: {"nom": filtro} } };
+
+    const collection = db.collection('Componentes');
+    await collection.createIndex({ titulo: 'text' });
+    const documents = await  collection.find(search).toArray();
+    return documents[0];
+
+}
+
+
+async function generarBuild(variable){
+    openaiClient.completions.create({
+        model: 'gpt-3.5-turbo-instruct', // Modelo de GPT-3
+        prompt: variable,
+        max_tokens: 150 // Límite de tokens en la respuesta
+    })
+    .then(response => {
+        resp = response.choices[0].text
+        let comps = [];
+        try{
+            const filtros = resp.split(",");
+
+            filtros.forEach(filtro => {
+                comps.push(getBuildComps(filtro));
+            });
+        }
+        catch{
+            generarBuild(variable)
+            .then(resp =>{
+                comps = resp;
+            });
+        }
+        return comps;
+    })
+}
+
+
 async function getPrebuild(codigo){
 
     try {
@@ -211,12 +250,8 @@ app.post('/generate', (req, res) => {
     const { typePc, prompt } = req.body;
     var variable = `Give me a ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component from each list separated by a comma`;
 
-    openaiClient.completions.create({
-        model: 'gpt-3.5-turbo-instruct', // Modelo de GPT-3
-        prompt: variable,
-        max_tokens: 150 // Límite de tokens en la respuesta
-    })
-    .then(response => {
+    generarBuild(variable)
+    .then(response =>{
         res.send(response.choices[0].text);
     })
     .catch(error => {
