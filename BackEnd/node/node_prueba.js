@@ -51,6 +51,18 @@ async function getNoticia(codigo){
         throw error;
     }
 
+} 
+async function getPrebuild(codigo){
+
+    try {
+        const collection = db.collection('Prebuilds');
+        const documents = await  collection.findOne({ code: codigo });
+        return documents;
+    } catch (error) {
+        console.error('Error al obtener los documentos:', error);
+        throw error;
+    }
+
 }
 
 async function buscarNoticia(query){
@@ -163,6 +175,19 @@ app.get('/noticias/:cod', (req, res) => {
     .then(news =>{
         console.log(news)
         res.render('noticias', { news: news });
+    })
+    .catch(error => {
+        console.error('Error en la función principal:', error);
+    });
+    
+});
+
+app.get('/prebuilds/:cod', (req, res) => {
+    const codNoticia = req.params.cod.toString();
+    getPrebuild(codNoticia)
+    .then(news =>{
+        console.log(news)
+        res.render('prebuilds', { news: news });
     })
     .catch(error => {
         console.error('Error en la función principal:', error);
