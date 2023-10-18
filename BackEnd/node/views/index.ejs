@@ -33,37 +33,37 @@
         <div class="row content">
 
           <div class="col-sm-1">
-            <button class="btn btn-light btn-sm" id="notAt" style="height:100%; width: 100%; display: none;"> 
+            <button class="btn" id="notAt" style="height:100%; width: 100%; display: none; background-color: rgb(151, 71, 255);"> 
               <img src="img/32x32 - invertido.png">
             </button>
           </div>
 
           <div class="col-sm-10">   
             <div class="card-deck text-center text-white">
-              <div class="card noticias-tips bg-transparent" style="border: none;">
+              <div class="card noticias-tips" style="border: none; background-color: #353535;">
                 <img class="img-fluid" src="img/Placeholder.png" style="aspect-ratio: 19/9;">
                 <div class="card-body text-justify">
-                  <a>Titulo Noticia</a>
+                  <a style="text-decoration: none;">Titulo Noticia</a>
                 </div>
               </div>  
                 
-              <div class="card noticias-tips bg-transparent" style="border: none;">
+              <div class="card noticias-tips" style="border: none; background-color: #353535;;">
                 <img class="img-fluid" src="img/Placeholder.png" style="aspect-ratio: 19/9;">
                 <div class="card-body text-justify">
-                  <a>Titulo Noticia</a>
+                  <a style="text-decoration: none;">Titulo Noticia</a>
                 </div>
               </div>
       
-              <div class="card noticias-tips bg-transparent" style="border: none;">
+              <div class="card noticias-tips" style="border: none; background-color: #353535;;">
                 <img class="img-fluid" src="img/Placeholder.png" style="aspect-ratio: 19/9;">
                 <div class="card-body text-justify">
-                  <a>Titulo Noticia</a>
+                  <a style="text-decoration: none;">Titulo Noticia</a>
                 </div>
               </div>
             </div>
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-light btn-sm" style="height:100%; width: 100%;" id="notAd"> 
+                <button class="btn" style="height:100%; width: 100%; background-color: rgb(151, 71, 255);" id="notAd"> 
                   <img src="img/32x32.png">
                 </button>
             </div>
@@ -82,23 +82,23 @@
             <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin-left: 0;">
             <div class="card-deck text-center">
               <div class="card" style="background-color: rgb(226, 203, 253);">
-                  <img class="img-fluid" src="img/Placeholder.png" alt="Low">
+                  <img class="img-fluid" src="img/low.jpeg" alt="Low" style="aspect-ratio: 19/9;">
                   <div class="card-body">
-                      <a href="#!" class="btn btn-dark btn-floating mx-1">Low</a>
+                      <a href="/prebuilds/low" class="btn btn-dark btn-floating mx-1">Low</a>
                   </div>
               </div>
                 
               <div class="card" style="background-color: rgb(226, 203, 253);">
-                <img class="img-fluid" src="img/Placeholder.png" alt="Mid">
+                <img class="img-fluid" src="img/mid.jfif" alt="Mid" style="aspect-ratio: 19/9;">
                 <div class="card-body">
-                    <a href="#!" class="btn btn-dark">Mid</a>
+                    <a href="/prebuilds/mid" class="btn btn-dark">Mid</a>
                 </div>
               </div>
       
               <div class="card" style="background-color: rgb(226, 203, 253);">
-                <img class="img-fluid" src="img/Placeholder.png" alt="High">
+                <img class="img-fluid" src="img/high.webp" alt="High" style="aspect-ratio: 19/9;">
                 <div class="card-body">
-                  <a href="#!" class="btn btn-dark btn-floating mx-1">High</a>
+                  <a href="/prebuilds/high" class="btn btn-dark btn-floating mx-1">High</a>
                 </div>
               </div>
             </div>
@@ -116,8 +116,11 @@
           <div class="col-sm-10 text-center"> 
             <h1 class="text-white text-left" style="margin-top: 1em;">Tips</h1>
             <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin-left: 0;">
+            <h3 class="text-white text-justify" style="margin-top: 1vh;">Dele click al boton de abajo para obtener un tip aleatorio: </h3>
             <input type="button" value="Tip aleatorio" class="btn btn-dark" id="botonTips">
-            <p id="tipText"></p>
+            <div class="text-black text-center" style="margin:auto; background-color: rgb(226, 203, 253); margin-top: 2vh; border: 3px double rgb(151, 71, 255); margin-bottom: 2vh; width: 50%;">
+              <p id="tipText"></p>
+            </div>
           </div>
           <div class="col-sm-1">
           </div>
