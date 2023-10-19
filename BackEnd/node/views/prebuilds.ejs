@@ -1,0 +1,29 @@
+<%- include('template/cabecera', {titulo: 'PcMage - Pre-Build'}); %>
+<body>
+    <%- include('template/navbar'); %>
+   <section class="cuerpo">
+        <h2>Prebuild</h2>
+        <hr>
+        <section class="noticiasBusqueda">
+          <ul>
+            <% componentes.forEach(function(componente) { %>
+
+              <div class="row content" style="margin: 0;" id="storage">
+                <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
+                    <img src="<%= componente.img %>" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
+                </div>
+                <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
+                    <a style="text-decoration: none;" name="linkComp" href="<%= componente.link %>"><p name="nombreComp" ><%= componente.nom %></p></a>
+                </div>
+                <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
+                    <p name="precioComp"><%= componente.precio %></p>
+                </div>
+              </div>
+
+            <% }); %>
+          </ul>
+        </section>
+    </section> 
+    <%- include('template/footer'); %>
+</body>
+

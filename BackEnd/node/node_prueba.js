@@ -54,49 +54,70 @@ async function getNoticia(codigo){
 }
 
 async function getBuildComps(filtro) {
-    const search = { $text: { $search: {"nom": filtro} } };
+    const search = {nom: filtro};
 
     const collection = db.collection('Componentes');
-    await collection.createIndex({ titulo: 'text' });
-    const documents = await  collection.find(search).toArray();
-    return documents[0];
+    const documents = await  collection.findOne(search);
+    return documents;
 
 }
 
 
 async function generarBuild(variable){
-    openaiClient.completions.create({
-        model: 'gpt-3.5-turbo-instruct', // Modelo de GPT-3
-        prompt: variable,
-        max_tokens: 150 // Límite de tokens en la respuesta
-    })
-    .then(response => {
-        resp = response.choices[0].text
+    
+    try {
+        const response = await openaiClient.completions.create({
+            model: 'gpt-3.5-turbo-instruct',
+            prompt: variable,
+            max_tokens: 200
+        });
+        const resp = response.choices[0].text;
+        console.log(resp);
         let comps = [];
-        try{
-            const filtros = resp.split(",");
-
-            filtros.forEach(filtro => {
-                comps.push(getBuildComps(filtro));
-            });
-        }
-        catch{
-            generarBuild(variable)
-            .then(resp =>{
-                comps = resp;
-            });
-        }
+        const filtros = resp.split(",");
+        await Promise.all(filtros.map(async filtro => {
+            try {
+                console.log(filtro);
+                filtro = filtro.replace("$", "");
+                filtro = filtro.replace("GPU:", "");
+                filtro = filtro.replace("CPU:", "");
+                filtro = filtro.replace(/\s*\$.*/, '');
+                filtro = filtro.trim();
+                filtro = filtro.toLowerCase();
+                console.log(filtro);
+                const result = await getBuildComps(filtro);
+                if (result != null) {
+                    comps.push(result);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }));
         return comps;
-    })
+    } 
+    catch (error) {
+        console.log(error);
+    }
 }
 
 
 async function getPrebuild(codigo){
-
+    arr = [];
     try {
         const collection = db.collection('Prebuilds');
         const documents = await  collection.findOne({ code: codigo });
-        return documents;
+        await Promise.all(documents.arrComps.map(async filtro => {
+            try {
+                const collection = db.collection('Componentes');
+                const comp = await  collection.findOne({ nom: filtro });
+                if (comp != null) {
+                    arr.push(comp);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }));
+        return arr;
     } catch (error) {
         console.error('Error al obtener los documentos:', error);
         throw error;
@@ -176,7 +197,7 @@ async function getRTip(){
 
 
 let listaCompConPrecios = "";
-let tipoComponentes = ["cpu","gpu"];
+let tipoComponentes = ["cpu","gpu", "motherboard", "power supply"];
 tipoComponentes.forEach(tipo => {
     listaCompConPrecios += `.  ${tipo} list (with their prices in argentinian pesos): `;
     getListaComponentes({"tipo": tipo})
@@ -221,12 +242,12 @@ app.get('/noticias/:cod', (req, res) => {
     
 });
 
-app.get('/prebuilds/:cod', (req, res) => {
+app.get('/builds/:cod', (req, res) => {
     const codNoticia = req.params.cod.toString();
     getPrebuild(codNoticia)
-    .then(news =>{
-        console.log(news)
-        res.render('prebuilds', { news: news });
+    .then(comps =>{
+        console.log(comps)
+        res.render('prebuilds', { componentes: comps });
     })
     .catch(error => {
         console.error('Error en la función principal:', error);
@@ -248,11 +269,12 @@ app.get('/buscar/:query', (req, res) => {
 
 app.post('/generate', (req, res) => {
     const { typePc, prompt } = req.body;
-    var variable = `Give me a ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component from each list separated by a comma`;
+    var variable = `Give me a ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component name from each list separated by a comma. Do not add the component's price`;
 
     generarBuild(variable)
     .then(response =>{
-        res.send(response.choices[0].text);
+        console.log(response);
+        res.send(response);
     })
     .catch(error => {
         console.error(error);
@@ -286,13 +308,6 @@ app.post('/gln', (req, res) => {
 
 app.put('/cn', (req, res) => {
     const noticia = req.body;
-    const client = new MongoClient(mongodbURI, {
-        serverApi: {
-          version: ServerApiVersion.v1,
-          strict: true,
-          deprecationErrors: true,
-        }
-    });
     
     const db = client.db(dbName);
     const collection = db.collection('Noticias');
@@ -300,6 +315,22 @@ app.put('/cn', (req, res) => {
     collection.insertOne(noticia)
     .then(response => {
         console.log("se cargo la noticia :)");
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send('Error cargando la noticia.');
+    });
+});
+
+app.put('/cb', (req, res) => {
+    const noticia = req.body;
+    
+    const db = client.db(dbName);
+    const collection = db.collection('Prebuilds');
+
+    collection.insertOne(noticia)
+    .then(response => {
+        console.log("se cargo la prebuild :)");
     })
     .catch(error => {
         console.error(error);
