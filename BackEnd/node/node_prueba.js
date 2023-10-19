@@ -55,7 +55,7 @@ async function getNoticia(codigo){
 
 async function getBuildComps(filtro) {
     const search = {nom: filtro};
-
+    console.log(filtro)
     const collection = db.collection('Componentes');
     const documents = await  collection.findOne(search);
     return documents;
@@ -77,16 +77,12 @@ async function generarBuild(variable){
         const filtros = resp.split(",");
         await Promise.all(filtros.map(async filtro => {
             try {
-                console.log(filtro);
                 filtro = filtro.replace("$", "");
-                filtro = filtro.replace("GPU:", "");
-                filtro = filtro.replace("CPU:", "");
                 filtro = filtro.replace(/\s*\$.*/, '');
                 filtro = filtro.trim();
                 filtro = filtro.toLowerCase();
-                console.log(filtro);
                 const result = await getBuildComps(filtro);
-                if (result != null) {
+                if (result != null){
                     comps.push(result);
                 }
             } catch (error) {
@@ -271,7 +267,11 @@ app.get('/buscar/:query', (req, res) => {
 
 app.post('/generate', (req, res) => {
     const { typePc, prompt } = req.body;
-    var variable = `Give me a ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component name from each list separated by a comma, like in this example: "ryzen 3 3200g, rtx 3060ti, gigabyte b450m...". Include ${strComps}. If the budget does not allow a graphics card you can choose "integrated graphics". Do not add the component's price. Keep in mind the budget`;
+    let b;
+    if (prompt<1000000){
+        b = "low budget"
+    }
+    var variable = `Give me a ${b} ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component name from each list separated by a comma, like in this example: ryzen 3 3200g, rtx 3060ti, gigabyte b450m... . Include ${strComps}. If the budget does not allow a graphics card or you are building an office pc, you can choose "integrated graphics" as a gpu. Do not add the component's price.`;
     generarBuild(variable)
     .then(response =>{
         console.log(response);
