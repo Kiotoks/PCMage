@@ -34,72 +34,7 @@
             <h2 class="text-white text-justify" style="padding-top: 5vh;">Especificaciones:</h2>
             <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin-left: 0;">
             <div class="text-black text-center" style="background-color: rgb(226, 203, 253); margin: auto; width:80%;">
-                <div class="row content" style="margin: 0;" id="cpu">
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
-                        <img src="" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
-                    </div>
-                    <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
-                        <a style="text-decoration: none;" name="linkComp"><p name="nombreComp"></p></a>
-                    </div>
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
-                        <p name="precioComp"></p>
-                    </div>
-                </div>
-                <div class="row content" style="margin: 0;" id="gpu">
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
-                        <img src="" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
-                    </div>
-                    <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
-                        <a style="text-decoration: none;" name="linkComp"><p name="nombreComp"></p></a>
-                    </div>
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
-                        <p name="precioComp"></p>
-                    </div>
-                </div>
-                <div class="row content" style="margin: 0;" id="motherboard">
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
-                        <img src="" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
-                    </div>
-                    <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
-                        <a style="text-decoration: none;" name="linkComp"><p name="nombreComp"></p></a>
-                    </div>
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
-                        <p name="precioComp"></p>
-                    </div>
-                </div>
-                <div class="row content" style="margin: 0;" id="power supply">
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
-                        <img src="" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
-                    </div>
-                    <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
-                        <a style="text-decoration: none;" name="linkComp"><p name="nombreComp"></p></a>
-                    </div>
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
-                        <p name="precioComp"></p>
-                    </div>
-                </div>
-                <div class="row content" style="margin: 0;" id="case">
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
-                        <img src="" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
-                    </div>
-                    <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
-                        <a style="text-decoration: none;" name="linkComp"><p name="nombreComp"></p></a>
-                    </div>
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
-                        <p name="precioComp"></p>
-                    </div>
-                </div>
-                <div class="row content" style="margin: 0;" id="storage">
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
-                        <img src="" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
-                    </div>
-                    <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
-                        <a style="text-decoration: none;" name="linkComp"><p name="nombreComp"></p></a>
-                    </div>
-                    <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
-                        <p name="precioComp"></p>
-                    </div>
-                </div>
+                <%- include('template/componentes'); %>
                 <div class="row content" style="background-color: #1f1f1f;">
                     <div class="col-sm-12">
                         <button id="guardarBuild" class="btn btn-light">Guardar Pre-Build</button>
