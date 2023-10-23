@@ -4,13 +4,27 @@
    <section class="cuerpo">
         <h2>Noticias</h2>
         <hr>
-        <section class="noticiasBusqueda">
+        <section class="container-fluid noticiasBusqueda" style="background-color: #1f1f1f;">
             <ul>
                 <% noticias.forEach(function(noticia) { %>
                   <li>
-                    <div  class="noticias-tips">
-                        <img id="img" src="<%= noticia.img1 %>">
-                        <a id="a" href="/noticias/<%= noticia.code %>"> <%= noticia.titulo %></a>
+                    <div class="row content">
+                      <div class="col-sm-1">
+                      </div>
+                      <div class="col-sm-10"> 
+                          <div class="card-deck text-center noticias-tips">
+                          <div class="card" style="background-color: rgb(226, 203, 253);">
+                              <img class="img-fluid" id="img" src="<%= noticia.img1 %>">
+                              <div class="card-body">
+                                <a id="a" href="/noticias/<%= noticia.code %>"> <%= noticia.titulo %></a>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-1">
+                      </div>
+                    </div>
+                    <div  class="noticias-tips">      
                     </div>
                   </li>
                 <% }); %>
