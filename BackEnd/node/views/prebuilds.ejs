@@ -3,12 +3,12 @@
     <%- include('template/navbar'); %>
     <div style="height: 9vh;"></div>
     <section class="cuerpo" style="background-color: #1f1f1f;">
-        <h2>Prebuild</h2>
+        <h2 class="text-white">Prebuild</h2>
         <hr style="background-color: rgb(151, 71, 255); height: 1px;">
         <section class="noticiasBusqueda">
             <% componentes.forEach(function(componente) { %>
 
-              <div class="row content" style="margin: 0; background-color: rgb(226, 203, 253);" id="storage">
+              <div class="row content" style="margin: 0; background-color: rgb(226, 203, 253); margin-bottom:1vh;" id="storage">
                 <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
                     <img src="<%= componente.img %>" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
                 </div>

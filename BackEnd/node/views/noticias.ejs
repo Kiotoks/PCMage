@@ -3,12 +3,12 @@
     <%- include('template/navbar'); %>
     <div style="height: 9vh;"></div>
     <div class="container-fluid" style="background-color: #1f1f1f;">
-        <img src="<%= news.img1 %>" alt="" style="width: min(100%, 1024px);" class="img-fluid">
+        <img src="<%= news.img1 %>" alt="" style="width: min(100%, 1024px);" class="img-fluid mx-auto d-block">
         <section class="cuerpo text-justify text-white">
             <h2 style="margin-top: 1vh;"><%= news.titulo %></h2>
             <hr style="background-color: rgb(151, 71, 255); height: 1px;">
             <p style="margin: 0;"><%- news.articulo %></p>
-            <p style="margin: 0; margin-top: 1vh;"><%= news.fecha %></p>
+            <p style="margin: 0; margin-top: 3vh; margin-bottom: 1vh;"><%= news.fecha %></p>
         </section>
     </div>
     <%- include('template/footer'); %>
