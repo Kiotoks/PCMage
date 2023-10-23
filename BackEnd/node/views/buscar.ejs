@@ -2,9 +2,10 @@
 <body>
     <%- include('template/navbar'); %>
    <section class="cuerpo">
-        <h2>Noticias</h2>
-        <hr>
-        <section class="container-fluid noticiasBusqueda" style="background-color: #1f1f1f;" style="margin: 0;">
+    <div style="height: 9vh;"></div>
+    <h1 class="text-white text-center" style="margin-bottom: 0;font-size: 7vh; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.2vh; padding-bottom: 1vh;">Noticias</h1>
+        <hr style="background-color: rgb(151, 71, 255); height: 1px; margin-left: 0;">
+        <section class="container-fluid noticiasBusqueda" style="background-color: #1f1f1f;">
             <ul style="margin: 0;">
                 <% noticias.forEach(function(noticia) { %>
                   <li>
@@ -13,7 +14,7 @@
                       </div>
                       <div class="col-sm-10"> 
                           <div class="card-deck text-center noticias-tips">
-                          <div class="card" style="background-color: #353535; margin: auto;">
+                          <div class="card" style="background-color: #353535; margin-top: 1vh; margin-bottom: 1vh;">
                               <img class="img-fluid" id="img" src="<%= noticia.img1 %>" style="aspect-ratio: 19/9;">
                               <div class="card-body">
                                 <a id="a" href="/noticias/<%= noticia.code %>" style="text-decoration: none; color:white;"> <%= noticia.titulo %></a>
