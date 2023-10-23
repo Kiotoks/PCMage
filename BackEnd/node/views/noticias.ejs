@@ -1,14 +1,20 @@
-
 <%- include('template/cabecera', {titulo:'PcMage - Noticia'}); %>
 <body>
     <%- include('template/navbar'); %>
-    <img src="<%= news.img1 %>" alt="">
-    <section class="cuerpo">
-        <h2><%= news.titulo %></h2>
-        <hr>
-        <p><%- news.articulo %></p>
-        <p><%= news.fecha %></p>
-        <%- include('template/footer'); %>
-    </section>
+    <div style="height: 9vh;"></div>
+    <div class="container-fluid" style="background-color: #1f1f1f;">
+        <img src="<%= news.img1 %>" alt="" style="width: 100%;" class="img-fluid">
+        <section class="cuerpo text-justify text-white">
+            <h2><%= news.titulo %></h2>
+            <hr style="background-color: rgb(151, 71, 255); height: 1px;">
+            <p style="margin: 0;"><%- news.articulo %></p>
+            <p style="margin: 0;"><%= news.fecha %></p>
+        </section>
+    </div>
+    <%- include('template/footer'); %>
+    <script src="pagPriScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
