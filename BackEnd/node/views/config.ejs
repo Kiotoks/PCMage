@@ -11,19 +11,19 @@
 
     <div class="container-fluid" style="background-color: #1f1f1f;">
         <section>
-            <h4 class="text-white text-justify" style="padding-top: 1vh;">Para poder ver y elegir que tipo de computadora armar y comprar, primero debes de ingresar el presupuesto en pesos que tengas para tu computadora.</h4>
-               
+            <h4 class="text-white text-justify" style="padding-top: 1vh;">Para poder ver y elegir que tipo de computadora armar y comprar, primero debes de ingresar el presupuesto en pesos que tengas para tu computadora.</h4> 
             <hr style="background-color: rgb(151, 71, 255); height: 1px; margin-left: 0;">
             <input class="form-control form-control-lg" type="number" placeholder="Ingrese presupuesto" id="prompt">
             <div class="text-white" style="margin-top: 1vh;">
-                <h3 class="text-white text-justify" style="padding-top: 1vh;">Seleccione el uso:</h3>
                 <h4 class="text-white text-justify">Luego de elegir el presupuesto, se debe elegir el tipo de uso que le vas a dar a tu nueva computadora. Hay 3 tipos de usos:
                     <ul class="text-white text-justify">
-                        <li>Gaming: Estas máquinas gastarían gran parte de su presupuesto en poder de procesamiento (principalmente de video), para poder correr todos los juegos que quieras!</li>
-                        <li>Oficinas: Estas computadoras estarían diseñadas para un uso cotidiano, de aplicaciones simples como Microsoft Excel, Word, páginas web con poco consumo de procesamiento, etc.</li>
-                        <li>Diseño: Estos dispositivos usarían el presupuesto en partes que puedan permitir correr simulaciones realistas que te permitan saber como va a funcionar lo que quieras construir.</li>
+                        <li style="margin-top:1vh; margin-bottom: 1vh;">Gaming: Estas máquinas gastarían gran parte de su presupuesto en poder de procesamiento (principalmente de video), para poder correr todos los juegos que quieras!</li>
+                        <li style="margin-top:1vh; margin-bottom: 1vh;">Oficinas: Estas computadoras estarían diseñadas para un uso cotidiano, de aplicaciones simples como Microsoft Excel, Word, páginas web con poco consumo de procesamiento, etc.</li>
+                        <li style="margin-top:1vh; margin-bottom: 1vh;">Diseño: Estos dispositivos usarían el presupuesto en partes que puedan permitir correr simulaciones realistas que te permitan saber como va a funcionar lo que quieras construir.</li>
                        </ul> 
                 </h4>
+                <hr style="background-color: rgb(151, 71, 255); height: 1px; margin-left: 0;">
+                <h3 class="text-white text-justify" style="padding-top: 1vh;">Seleccione el uso:</h3>
                 <form id="generate-form">
                     <div class="form-check" style="padding-top: 1vh;">
                         <input class="form-check-input" type="radio" id="gaming" name="tipopc">Gaming
@@ -41,7 +41,7 @@
         </section>
         <section>
             <h2 class="text-white text-justify" style="padding-top: 5vh;">Especificaciones:</h2>
-            <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin: 0; padding-bottom: 1vh;">
+            <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin: 0;">
             <div class="text-black text-center" style="background-color: rgb(226, 203, 253); margin-left:auto; margin-right: auto; width:80%; display:none;">
                 <%- include('template/componentes'); %>
                 <div class="row content" style="background-color: #1f1f1f;">
