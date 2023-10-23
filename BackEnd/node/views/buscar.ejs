@@ -5,7 +5,7 @@
         <h2>Noticias</h2>
         <hr>
         <section class="container-fluid noticiasBusqueda" style="background-color: #1f1f1f;" style="margin: 0;">
-            <ul>
+            <ul style="margin: 0;">
                 <% noticias.forEach(function(noticia) { %>
                   <li>
                     <div class="row content">
@@ -14,7 +14,7 @@
                       <div class="col-sm-10"> 
                           <div class="card-deck text-center noticias-tips">
                           <div class="card" style="background-color: #353535; margin: auto;">
-                              <img class="img-fluid" id="img" src="<%= noticia.img1 %>">
+                              <img class="img-fluid" id="img" src="<%= noticia.img1 %>" style="aspect-ratio: 19/9;">
                               <div class="card-body">
                                 <a id="a" href="/noticias/<%= noticia.code %>" style="text-decoration: none; color:white;"> <%= noticia.titulo %></a>
                               </div>
