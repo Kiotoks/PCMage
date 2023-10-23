@@ -3,9 +3,12 @@
     <%- include('template/navbar'); %>
    <section class="cuerpo">
     <div style="height: 9vh;"></div>
-    <h1 class="text-white text-center" style="margin-bottom: 0;font-size: 7vh; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.2vh; padding-bottom: 1vh;">Noticias</h1>
-        <hr style="background-color: rgb(151, 71, 255); height: 1px; margin-left: 0;">
-        <section class="container-fluid noticiasBusqueda" style="background-color: #1f1f1f;">
+    <section>
+    <div class="text-center" style=" background-color: rgb(226, 203, 253); width:100%;">
+      <h1 class="text-white text-center" style="margin-bottom: 0;font-size: 7vh; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.2vh; padding-bottom: 1vh;">Noticias</h1>    </div>
+    </section>
+    
+    <section class="container-fluid noticiasBusqueda" style="background-color: #1f1f1f;">
             <ul style="margin: 0;">
                 <% noticias.forEach(function(noticia) { %>
                   <li>
@@ -33,6 +36,7 @@
         </section>
     </section> 
     <%- include('template/footer'); %>
+    <script src="pagPriScript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
