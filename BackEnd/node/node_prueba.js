@@ -69,12 +69,15 @@ async function generarBuild(variable){
         const response = await openaiClient.completions.create({
             model: 'gpt-3.5-turbo-instruct',
             prompt: variable,
-            max_tokens: 200
+            max_tokens: 300,
+            best_of: 3,
+            temperature: 0.2,
         });
         const resp = response.choices[0].text;
         console.log(resp);
         let comps = [];
         const filtros = resp.split(",");
+        console.log(resp);
         await Promise.all(filtros.map(async filtro => {
             try {
                 filtro = filtro.replace("$", "");
@@ -193,7 +196,7 @@ async function getRTip(){
 
 
 let listaCompConPrecios = "";
-var tipoComponentes = ["cpu","gpu", "motherboard", "power supply"];
+var tipoComponentes = ["cpu","gpu", "motherboard", "power supply", "case", "ram", "storage"];
 var strComps = "";
 tipoComponentes.forEach(tipo => {
     strComps += " one " +tipo+ ",";
@@ -271,7 +274,7 @@ app.post('/generate', (req, res) => {
     if (prompt<1000000){
         b = "low budget"
     }
-    var variable = `Give me a ${b} ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component name from each list separated by a comma, like in this example: ryzen 3 3200g, rtx 3060ti, gigabyte b450m... . Include ${strComps}. If the budget does not allow a graphics card or you are building an office pc, you can choose "integrated graphics" as a gpu. Do not add the component's price.`;
+    var variable = `Give me a ${b} ${typePc} PC specification list with a budget of ${prompt} argentinian pesos. Choose one from every of this lists of components ${listaCompConPrecios}. Reduce your awnser to just one component name from each list separated by a comma, like in this example: ryzen 3 3200g, rtx 3060ti, gigabyte b450m... . Include ${strComps}. The total of the components prices should not be more than the budget. If the budget does not allow a graphics card or you are building an office pc, you can choose "integrated graphics" as a gpu. Do not add the component's price.a`;
     generarBuild(variable)
     .then(response =>{
         console.log(response);
@@ -332,6 +335,22 @@ app.put('/cb', (req, res) => {
     collection.insertOne(noticia)
     .then(response => {
         console.log("se cargo la prebuild :)");
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send('Error cargando la noticia.');
+    });
+});
+
+app.put('/cpt', (req, res) => {
+    const p = req.body;
+    
+    const db = client.db(dbName);
+    const collection = db.collection('Componentes');
+
+    collection.insertOne(p)
+    .then(response => {
+        console.log("se cargo el componente :)");
     })
     .catch(error => {
         console.error(error);
