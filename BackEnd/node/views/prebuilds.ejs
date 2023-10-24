@@ -1,27 +1,33 @@
 <%- include('template/cabecera', {titulo: 'PcMage - Pre-Build'}); %>
-<body>
+<body style="background-color: #1f1f1f;"  class="container-fluid d-flex-column">
     <%- include('template/navbar'); %>
-    <div style="height: 9vh;"></div>
-    <section class="cuerpo" style="background-color: #1f1f1f;">
-        <h2 class="text-white">Prebuild</h2>
+    
+    <section style="width: min(1024px,100%); margin: auto;">
+
+
+        <div style="height: 15vh;"></div>
+        <h1 class="text-white">Prebuild</h1>
         <hr style="background-color: rgb(151, 71, 255); height: 1px;">
         <section class="noticiasBusqueda">
             <% componentes.forEach(function(componente) { %>
 
-              <div class="row content" style="margin: 0; background-color: rgb(226, 203, 253); margin-bottom:1vh;" id="storage">
-                <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255); height:30vh;">
-                    <img src="<%= componente.img %>" class="img-fluid" style="height: 100%; width: 100%; aspect-ratio: 1/1;" name="imagenComp">
+               
+
+              <div class="row rounded-lg" style="margin: 10px; background-color: rgb(226, 203, 253);">
+                <div class="col-sm-3 d-flex-column" style="border: 3px rgb(151, 71, 255);">
+                    <img src="<%= componente.img %>" class="img-fluid" style="aspect-ratio: 1/1; height: auto; width: 8em;" name="imagenComp">
                 </div>
-                <div class="col-sm-6" style="border: 3px double rgb(151, 71, 255);">
-                    <a style="text-decoration: none;" name="linkComp" href="<%= componente.link %>"><p name="nombreComp" ><%= componente.nom %></p></a>
+                <div class="col-sm-6 d-flex-column" style="border: 3px rgb(151, 71, 255); margin: auto;">
+                    <a style="text-decoration: none;" href="<%= componente.link %>" name="linkComp"><p name="nombreComp"><%= componente.nom %></p></a>
                 </div>
-                <div class="col-sm-3" style="border: 3px double rgb(151, 71, 255);">
-                    <p name="precioComp"><%= componente.precio %></p>
+                <div class="col-sm-3 d-flex-column" style="border: 3px rgb(151, 71, 255); margin: auto;">
+                    <p name="precioComp"> $ <%= componente.precio %></p>
                 </div>
               </div>
 
             <% }); %>
         </section>
+        <div style="height: 15vh;"></div>
     </section> 
     <%- include('template/footer'); %>
     <script src="pagPriScript.js"></script>
