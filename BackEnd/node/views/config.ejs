@@ -9,50 +9,61 @@
         </div>
     </section>
 
-    <div class="container-fluid" style="background-color: #1f1f1f;">
-        <section>
-            <h4 class="text-white text-justify" style="padding-top: 1vh;">Para poder ver y elegir que tipo de computadora armar y comprar, primero debes de ingresar el presupuesto en pesos que tengas para tu computadora.</h4> 
-            <hr style="background-color: rgb(151, 71, 255); height: 1px; margin-left: 0;">
+    <div class="container-fluid d-flex-column" style="background-color: #1f1f1f;">
+        <section style="width: min(1024px,100%); margin: auto;">
+            <h2 class="text-white text-justify" style="padding-top: 1vh;">Elija un presupuesto</h2>
+            <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin: 0; margin-bottom: 3vh;">
+            <p class="text-white text-justify">El presupuesto va a variar dependiendo de sus necesidades. Pero generalmente mientras mas presupuesto tengas, mejor la computadora resultante. Dependiendo del uso que le vayas a usar se va a sugerir un presupuesto minimo, pero no se recomienda bajar de 300 USD (300.000 pesos) <br><br>Teniendo esto en cuenta, Ingresa tu presupuesto <strong>en pesos argentinos</strong> en el siguiente recuadro</p>
             <input class="form-control form-control-lg" type="number" placeholder="Ingrese presupuesto" id="prompt">
-            <div class="text-white" style="margin-top: 1vh;">
-                <h4 class="text-white text-justify">Luego de elegir el presupuesto, se debe elegir el tipo de uso que le vas a dar a tu nueva computadora. Hay 3 tipos de usos:
-                    <ul class="text-white text-justify">
-                        <li style="margin-top:1vh; margin-bottom: 1vh;">Gaming: Estas máquinas gastarían gran parte de su presupuesto en poder de procesamiento (principalmente de video), para poder correr todos los juegos que quieras!</li>
-                        <li style="margin-top:1vh; margin-bottom: 1vh;">Oficinas: Estas computadoras estarían diseñadas para un uso cotidiano, de aplicaciones simples como Microsoft Excel, Word, páginas web con poco consumo de procesamiento, etc.</li>
-                        <li style="margin-top:1vh; margin-bottom: 1vh;">Diseño: Estos dispositivos usarían el presupuesto en partes que puedan permitir correr simulaciones realistas que te permitan saber como va a funcionar lo que quieras construir.</li>
-                       </ul> 
+            <div class="text-white " style="margin-top: 1vh; ">
+                <h4 class="text-white text-justify">
                 </h4>
-                <hr style="background-color: rgb(151, 71, 255); height: 1px; margin-left: 0;">
-                <h3 class="text-white text-justify" style="padding-top: 1vh;">Seleccione el uso:</h3>
+                <h2 class="text-white text-justify" style="padding-top: 1vh;">Seleccione el uso:</h2>
+                <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin: 0; margin-bottom: 3vh;">
+                <p class="text-white text-justify">Luego de elegir el presupuesto, se debe elegir el tipo de uso que le vas a dar a tu nueva computadora. Hay 3 tipos de usos:</p>
                 <form id="generate-form">
                     <div class="form-check" style="padding-top: 1vh;">
                         <input class="form-check-input" type="radio" id="gaming" name="tipopc">Gaming
+                        <br>
+                        <i style="color: rgb(194, 194, 194);">Estas máquinas gastarían gran parte de su presupuesto en poder de procesamiento (principalmente de video), para poder correr todos los juegos que quieras!</i>
                     </div>
                     <div class="form-check" style="padding-top: 1vh;">
                         <input class="form-check-input" type="radio" id="office" name="tipopc">Oficina
+                        <br>
+                        <i style="color: rgb(194, 194, 194);">Estas computadoras estarían diseñadas para un uso cotidiano, de aplicaciones simples como Microsoft Excel, Word, páginas web con poco consumo de procesamiento, etc.</i>
+
                     </div>
                     <div class="form-check" style="padding-top: 1vh;">
                         <input class="form-check-input" type="radio" id="design" name="tipopc">Diseño
+                        <br>
+                        <i style="color: rgb(194, 194, 194);">Estos dispositivos usarían el presupuesto en partes que puedan permitir correr simulaciones realistas que te permitan saber como va a funcionar lo que quieras construir.</i>
                     </div>
 
-                    <input class="btn btn-light" type="submit" value="Generar" id="generate-form" style="margin-top: 1vh;">
+                    <input class="btn btn-light" type="submit" value="Generar" id="generate-form" style="margin-top: 1vh; margin-left: 47%;">
                 </form>
             </div>
         </section>
-        <section>
-            <h2 class="text-white text-justify" style="padding-top: 5vh;">Especificaciones:</h2>
-            <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin: 0;">
-            <div class="text-black text-center" style="background-color: rgb(226, 203, 253); margin-left:auto; margin-right: auto; width:80%; display:none;">
+        <section id="esp" style="width: min(1024px,100%); margin: auto; display: none;">
+            <h2 class="text-white text-justify" style="padding-top: 5vh;">Especificaciones</h2>
+            <hr style="background-color: rgb(151, 71, 255); height: 1px; width: 60%; margin: 0; margin-bottom: 3vh;">
+            <p class="text-white text-justify">Estos son los componentes seleccionados por nuestra ia para tu caso en especifico:</p>
+            <br>
+            <div class="text-black text-center" style="margin-left:auto; margin-right: auto; width:80%; ">
                 <%- include('template/componentes'); %>
+
+                <h3  class="text-white" id="textoTotal"></h3>
+                <br>
                 <div class="row content" style="background-color: #1f1f1f;">
                     <div class="col-sm-12">
-                        <button id="guardarBuild" class="btn btn-light">Guardar Pre-Build</button>
+                        <button id="guardarBuild" class="btn btn-light" >Guardar Pre-Build</button>
                     </div>
                 </div>
-                
             </div>
-            
-            
+            <br>
+            <br>
+            <i style="color: rgb(194, 194, 194);"> Si ves alguna discrepancia, ya sea con el precio o incopatibilidad de componentes, vuelve a darle al boton generar para obtener una nueva build </i>
+            <br>
+            <i style="color: rgb(194, 194, 194);">De lo contrario, si te gusta la configuracion, puedes darle al boton de guardar build. Este copiara un link a tu portapapeles y podras ver esta build en cualquier lugar</i>
         </section>
 
     </div>

@@ -25,16 +25,21 @@ document.getElementById('generate-form').addEventListener('submit', function(eve
     })
     .then(response => response.json())
     .then(data => {
+        var total = 0;
+        document.getElementById("esp").style.display = "block"
         arrayComp = data;
         if (data.length > 1){
             data.forEach(comp => {
                 compDiv = document.getElementById(comp.tipo);
+                compDiv.style.display = "flex"
                 compDiv.querySelector('[name="imagenComp"]').src = comp.img;
                 compDiv.querySelector('[name="linkComp"]').href = comp.link;
                 compDiv.querySelector('[name="nombreComp"]').innerText = comp.nom;
+                total += comp.precio;
                 compDiv.querySelector('[name="precioComp"]').innerText = "$" + comp.precio;
             });
         }
+        document.getElementById("textoTotal").innerText ="Total: $" + total;
     })
     .catch(error => {
         console.error(error);
