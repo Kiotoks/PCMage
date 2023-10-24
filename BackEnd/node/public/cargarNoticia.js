@@ -38,7 +38,6 @@ document.getElementById('cargarProducto-form').addEventListener('submit', functi
     fetch(`https://api.mercadolibre.com/items/${mla}`)
     .then(response => response.json())
     .then(product =>{
-        id = thumbnail_id
         var requestData = {
             nom: nombre,
             MLA: mla,
